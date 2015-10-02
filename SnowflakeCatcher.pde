@@ -3,7 +3,7 @@ void setup()
 {
   size(800, 600); //Resolution
   background(0);
-  flakes = new Snowflake[400];  //Num. of snowflakes
+  flakes = new Snowflake[100];  //Num. of snowflakes
   for (int i = 0; i < flakes.length; ++i) {
     flakes[i] = new Snowflake((int)(Math.random()*width), (int)(Math.random()*height), 5);
   }
