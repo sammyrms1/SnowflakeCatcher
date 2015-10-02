@@ -1,42 +1,71 @@
+Snowflake [] flakes;
 void setup()
 {
-  //your code here
+  size(800, 600); //Resolution
+  background(0);
+  flakes = new Snowflake[400];  //Num. of snowflakes
+  for (int i = 0; i < flakes.length; ++i) {
+    flakes[i] = new Snowflake((int)(Math.random()*width), (int)(Math.random()*height), 5);
+  }
 }
+
 void draw()
 {
-  //your code here
+  for (int i = 0; i < flakes.length; ++i) {
+    flakes[i].erase();
+    flakes[i].lookDown();
+    flakes[i].move();
+    flakes[i].wrap();
+    flakes[i].show();
+  }
 }
 void mouseDragged()
 {
-  //your code here
+  noStroke();
+  fill(255, 0, 0);
+  ellipse(mouseX, mouseY, 20, 20);
 }
 
 class Snowflake
 {
-  //class member variable declarations
-  Snowflake()
+  int flakeX, flakeY, flakeSize;
+  boolean moving;
+  Snowflake(int x, int y, int size)
   {
-    //class member variable initializations
+    flakeX = x;
+    flakeY = y;
+    flakeSize = size;
+    moving = true;
   }
   void show()
   {
-    //your code here
+    fill(255);
+    noStroke();
+    ellipse(flakeX, flakeY, flakeSize, flakeSize);
   }
   void lookDown()
   {
-    //your code here
+    if (get(flakeX, flakeY+5) == color(255, 0, 0)) {
+     moving = false;
+    }
   }
   void erase()
   {
-    //your code here
+      fill(0);
+      ellipse(flakeX, flakeY, 7, 7);
   }
   void move()
   {
-    //your code here
+    if (moving == true) {
+      flakeY++;
+    }
   }
   void wrap()
   {
-    //your code here
+    if(flakeY >= height){
+      flakeX = (int)(Math.random()*width);
+      flakeY = 0;
+    }
   }
 }
 
